@@ -20,7 +20,12 @@ import AppCard from './components/AppCard.vue'
     },
     methods:{
       getApi(){
-        axios.get(store.apiUrl)
+        axios.get(store.apiUrl, {
+          params: {
+            title: store.title,
+            language: store.original_language
+          }
+        })
         .then(result =>{
           store.moviesList = result.data.results
           console.log(store.moviesList);
@@ -41,7 +46,7 @@ import AppCard from './components/AppCard.vue'
 
   <AppHeader />
 
-  <AppMain />
+  <AppMain @startSearch="getApi()" />
 
   <AppCard />
 

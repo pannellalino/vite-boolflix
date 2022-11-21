@@ -13,6 +13,12 @@ export default {
 
 
 <template>
+<div class="container  d-flex justify-content-center">
+  <input 
+    v-model="store.title"
+    @keyup.enter="$emit('startSearch')" type="text" class="form-control w-25" placeholder="Search Movie">
+</div>
+
   <div class="container d-flex flex-wrap">
     <div v-for="(movie, index) in store.moviesList" :key="index" class="card">
     <div class="card-body">
@@ -20,8 +26,6 @@ export default {
       <h6 class="card-subtitle mb-2 text-muted">{{movie.original_title}}</h6>
       <h6 class="card-subtitle mb-2 text-muted">{{movie.original_language}}</h6>
       <p class="card-text">{{movie.overview}}</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
     </div>
   </div>
   </div>

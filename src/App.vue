@@ -22,7 +22,8 @@ import AppCard from './components/AppCard.vue'
       getApiMovies(){
         axios.get(store.apiUrlMovies, {
           params: {
-            query: store.title
+            query: store.title,
+            poster_path: store.poster_path
           }
         })
         .then(result =>{
@@ -36,11 +37,27 @@ import AppCard from './components/AppCard.vue'
       getApiTv(){
           axios.get(store.apiUrlTv, {
             params: {
-              query: store.title
+              query: store.title,
+              poster_path: store.poster_path
             }
           })
           .then(result =>{
             store.tvList = result.data.results
+            console.log(result.data.results);
+          })
+          .catch(error =>{
+            console.log(error);
+          })
+        },
+        getApiPopular(){
+          axios.get(store.apiUrlPopular, {
+            params: {
+              query: store.title,
+              poster_path: store.poster_path
+            }
+          })
+          .then(result =>{
+            store.popularList = result.data.results
           })
           .catch(error =>{
             console.log(error);
@@ -50,6 +67,9 @@ import AppCard from './components/AppCard.vue'
          this.getApiTv();
          this.getApiMovies(); 
         }
+      },
+      mounted(){
+        this.getApiPopular();
       }
     }
 </script>
@@ -59,8 +79,7 @@ import AppCard from './components/AppCard.vue'
 
   <AppHeader />
 
-  <AppMain @search="startSearch()"
-  @reset="startReset()"/>
+  <AppMain @search="startSearch()"/>
 
   <AppCard />
 

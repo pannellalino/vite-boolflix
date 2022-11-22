@@ -19,11 +19,10 @@ import AppCard from './components/AppCard.vue'
       }
     },
     methods:{
-      getApi(){
-        axios.get(store.apiUrl, {
+      getApiMovies(){
+        axios.get(store.apiUrlMovies, {
           params: {
-            title: store.title,
-            language: store.original_language
+            query: store.title
           }
         })
         .then(result =>{
@@ -35,9 +34,23 @@ import AppCard from './components/AppCard.vue'
         })
       }
     },
-    mounted(){
-      this.getApi()
-    } 
+    getApiTv(){
+        axios.get(store.apiUrlTv, {
+          params: {
+            query: store.title,
+            poster_path: String
+          }
+        })
+        .then(result =>{
+          store.tvList = result.data.results
+          console.log(store.tvList);
+        })
+        .catch(error =>{
+          console.log(error);
+        })
+      },
+      mounted(){
+      }
   }
 </script>
 
@@ -46,7 +59,7 @@ import AppCard from './components/AppCard.vue'
 
   <AppHeader />
 
-  <AppMain @startSearch="getApi()" />
+  <AppMain @startSearch="getApiMovies()"/>
 
   <AppCard />
 

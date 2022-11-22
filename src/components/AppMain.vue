@@ -48,7 +48,7 @@ export default {
           <img :src="store.poster_path + movie.poster_path" alt="{{movie.original_title}}">
           <h5 class="card-title text-white">{{movie.title}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{movie.original_title}}</h6>
-          <span :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
+          <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
         </div>
       </div>
 
@@ -58,7 +58,7 @@ export default {
           <img :src="store.poster_path + serie.poster_path" alt="{{serie.original_name}}">
           <h5 class="card-title text-white">{{serie.name}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{serie.original_name}}</h6>
-          <span :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
+          <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
         </div>
       </div>
 
@@ -67,7 +67,7 @@ export default {
           <img :src="store.poster_path + pop.poster_path" alt="{{pop.original_title}}">
           <h5 class="card-title text-white m-2">{{pop.title}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{pop.original_title}}</h6>
-          <span :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
+          <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
         </div>
       </div>
 

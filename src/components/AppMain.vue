@@ -7,8 +7,16 @@ export default {
     return{
       store
     }
-  }
-}
+  },
+  methods:{
+    startReset(){
+          store.moviesList = [],
+          store.tvList = [],
+          store.title = ''
+        }
+      }
+    }
+
 </script>
 
 
@@ -16,11 +24,12 @@ export default {
   <main>
     <div class="container d-flex justify-content-center">
       <input 
-        v-model="store.title"
-        @keyup.enter="$emit('startSearch')" 
+        v-model.trim="store.title"
+        @keyup.enter="$emit('search')"
         type="text" 
         class="form-control w-25" 
         placeholder="Search Movie">
+        <button @click="startReset()" type="button" class="ms-2 btn btn-outline-light">Reset</button>
     </div>
     
       <div class="container d-flex flex-wrap">
@@ -39,7 +48,7 @@ export default {
 <style lang="scss" scoped>
 main{
   padding-top: 80px;
-  input{
+  input, button{
     background-color: rgba(37, 37, 37, 0.42);
     color: white;
   }

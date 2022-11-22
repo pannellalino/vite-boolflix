@@ -10,4 +10,4 @@ export const store = reactive({
   original_language: '',
   vote_average: '',
   overview: ''
-})
+});

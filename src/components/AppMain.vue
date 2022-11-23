@@ -50,7 +50,7 @@ export default {
         <div class="card-body text-overlay">
           <img :src="store.poster_path + movie.poster_path" alt="{{movie.original_title}}">
           <h6 class="card-subtitle mb-2 text-muted">{{movie.original_title}}</h6>
-          <span v-if="store.original_language === 'it'" :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
+          <span v-if="store.original_language === 'it'" :class="'fi fi-' + changeFlag()">{{original_language}}</span>
         </div>
         <h5 class="card-title text-white m-1">{{movie.title}}</h5>
           <div class="stars">
@@ -63,7 +63,7 @@ export default {
         <div class="card-body text-overlay">
           <img :src="store.poster_path + serie.poster_path" alt="{{serie.original_name}}">
           <h6 class="card-subtitle mb-2 text-muted">{{serie.original_name}}</h6>
-          <span :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
+          <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
         </div>
         <h5 class="card-title text-white m-1">{{serie.name}}</h5>
           <div class="stars">

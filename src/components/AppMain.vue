@@ -17,8 +17,6 @@ export default {
         changeFlag(){
           if(store.original_language = 'en'){
             return 'gb'
-          } else if (store.original_language = 'it') {
-            return 'it'
           } else{
             return store.original_language
           }
@@ -44,31 +42,30 @@ export default {
     <div class="container d-flex flex-wrap">
       
       <div v-for="(movie, index) in store.moviesList" :key="index" class="card border-0 mb-2 p-2 text-center">
-        <div class="card-body">
+        <div class="card-body text-overlay">
           <img :src="store.poster_path + movie.poster_path" alt="{{movie.original_title}}">
-          <h5 class="card-title text-white">{{movie.title}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{movie.original_title}}</h6>
-          <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
+          <span v-if="store.original_language === 'it'" :class="'fi fi-' + changeFlag()">{{original_language}}</span>
         </div>
+        <h5 class="card-title text-white">{{movie.title}}</h5>
       </div>
 
       <div v-for="(serie, index) in store.tvList" :key="index" class="card border-0 mb-2 p-2 text-center">
-        <h2>Serie Tv</h2>
-        <div class="card-body">
+        <div class="card-body text-overlay">
           <img :src="store.poster_path + serie.poster_path" alt="{{serie.original_name}}">
-          <h5 class="card-title text-white">{{serie.name}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{serie.original_name}}</h6>
-          <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
+          <span :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
         </div>
+        <h5 class="card-title text-white">{{serie.name}}</h5>
       </div>
 
-      <div v-for="(pop, index) in store.popularList" :key="index" class="card border-0 mb-2 p-2 text-center">
-        <div class="card-body">
+      <div v-for="(pop, index) in store.popularList" :key="index" class="card border-0 mb-2 text-center">
+        <div class="card-body text-overlay">
           <img :src="store.poster_path + pop.poster_path" alt="{{pop.original_title}}">
-          <h5 class="card-title text-white m-2">{{pop.title}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{pop.original_title}}</h6>
           <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
         </div>
+        <h5 class="card-title text-white">{{pop.title}}</h5>
       </div>
 
     </div>
@@ -86,11 +83,38 @@ main{
     width: calc(100% / 5);
     background-color: rgb(16, 16, 16);
     &:hover{
-      filter: opacity(.1);
-    }
-    img{
-      width: 100%;
+      cursor: pointer;   
+      h6, span{
+        display: block;
+      }
     }
   }
+  .text-overlay{
+    position: relative;
+    width: 100%;
+    &:hover{
+      height: 100%;
+      width: 100%;
+      filter: opacity(1);
+      z-index: 999;
+      }
+      h6{
+        position: absolute;
+        padding:10px 0;
+        top: 20px;
+        width: 191px;
+        display: none;
+      }
+      span{
+        position: absolute;
+        left: 10px;
+        top: 70px;
+        width: 210px;
+        display: none;
+      }
+    }
+    img{
+      width: 191px;
+    }
 }
 </style>

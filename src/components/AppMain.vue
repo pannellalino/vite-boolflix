@@ -14,13 +14,14 @@ export default {
           store.tvList = [],
           store.title = ''
         },
-        changeFlag(){
-          if(store.original_language = 'en'){
+        changeFlag(original_language){
+          console.log('original language', original_language)
+          if(original_language === 'en'){
             return 'us'
-          } else if(store.original_language = 'it'){
+          } else if(original_language === 'it'){
             return 'it'
           }else {
-            return store.original_language
+            return original_language
           }
         },
         getRating(voto){
@@ -50,7 +51,7 @@ export default {
         <div class="card-body text-overlay">
           <img :src="store.poster_path + movie.poster_path" alt="{{movie.original_title}}">
           <h6 class="card-subtitle mb-2 text-muted">{{movie.original_title}}</h6>
-          <span v-if="store.original_language === 'it'" :class="'fi fi-' + changeFlag()">{{original_language}}</span>
+          <span  :class="'fi fi-' + changeFlag(movie.original_language)">{{original_language}}</span>
         </div>
         <h5 class="card-title text-white m-1">{{movie.title}}</h5>
           <div class="stars">
@@ -63,7 +64,7 @@ export default {
         <div class="card-body text-overlay">
           <img :src="store.poster_path + serie.poster_path" alt="{{serie.original_name}}">
           <h6 class="card-subtitle mb-2 text-muted">{{serie.original_name}}</h6>
-          <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
+          <span :class="'fi fi-' + changeFlag(serie.original_language)">{{original_language}}</span>
         </div>
         <h5 class="card-title text-white m-1">{{serie.name}}</h5>
           <div class="stars">
@@ -75,9 +76,11 @@ export default {
       <div v-for="(pop, index) in store.popularList" :key="index" class="card border-0 mb-2 text-center">
         <div class="card-body text-overlay">
           <img :src="store.poster_path + pop.poster_path" alt="{{pop.original_title}}">
-          <h6 class="card-subtitle text-muted">{{pop.original_title}}</h6>
-          <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
-          <p class="p-3">{{pop.overview}}</p>
+          <div class="overlay">
+            <h6 class="card-subtitle text-muted">{{pop.original_title}}</h6>
+            <span :class="'fi fi-' + changeFlag(pop.original_language)">{{original_language}}</span>
+            <p class="p-4">{{pop.overview}}</p>
+          </div>
           <h5 class="card-title text-white m-1">{{pop.title}}</h5> 
           <div class="stars">
             <span v-for="star in getRating(pop.vote_average)" :key="star" class="fa fa-star checked"></span>
@@ -104,25 +107,29 @@ main{
       cursor: pointer;   
       h6, .fi, p{
         display: block;
-        z-index: 999;
       }
     }
   }
-  .text-overlay{
+  .overlay{
+    height: 340px;
+    width: 100%;
+    background-color: rgba(0,0,0,.5);
+    opacity: 0;
+    overflow: scroll;
     &:hover{
-      opacity: .1;
+      opacity: 1;
     }
+
+  }
+  .text-overlay{
     h6{
-        position: absolute;
         padding:10px 0;
         top: 20px;
         right: 0;
         width: 100%;
         display: none;
-        z-index: 333;
       }
       .fi{
-        position: absolute;
         left: 0px;
         right: 0px;
         top: 70px;
@@ -131,14 +138,16 @@ main{
       }
       p{
         color: rgb(199, 199, 199);
-        position: absolute;
         left: 0px;
         right: 0px;
         top: 80px;
         width: 100%;
+        height: 100%;
         display: none;
+        overflow: scroll;
       }
     }
+    
     img{
       width: 100%;
     }
@@ -148,6 +157,8 @@ main{
     }
     .card-body{
       width: 100%;
+      height: 100%;
+      position: relative;
     }
 }
 </style>

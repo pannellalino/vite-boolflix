@@ -14,3 +14,7 @@ export const store = reactive({
   vote_average: '',
   overview: ''
 });
+
+
+// <span v-for="star in getRating(pop.vote_average)" :key="star" class="fa fa-star checked"></span>
+// 

@@ -9,7 +9,7 @@ export default {
     }
   },
   methods:{
-    startReset(){
+        startReset(){
           store.moviesList = [],
           store.tvList = [],
           store.title = ''
@@ -20,6 +20,9 @@ export default {
           } else{
             return store.original_language
           }
+        },
+        getRating(voto){
+          return Math.ceil(voto / 2) 
         }
       }
     }
@@ -45,15 +48,12 @@ export default {
         <div class="card-body text-overlay">
           <img :src="store.poster_path + movie.poster_path" alt="{{movie.original_title}}">
           <h6 class="card-subtitle mb-2 text-muted">{{movie.original_title}}</h6>
-          <span v-if="store.original_language === 'it'" :class="'fi fi-' + changeFlag()">{{original_language}}</span>
+          <span v-if="store.original_language === 'it'" :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
         </div>
-        <h5 class="card-title text-white">{{movie.title}}</h5>
+        <h5 class="card-title text-white m-1">{{movie.title}}</h5>
         <div class="stars">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+            <span v-for="star in getRating(movie.vote_average)" :key="star" class="fa fa-star checked"></span>
+            <span v-for="star in (5 - getRating(movie.vote_average))" :key="star" class="fa fa-star"></span>
           </div>
       </div>
 
@@ -63,28 +63,22 @@ export default {
           <h6 class="card-subtitle mb-2 text-muted">{{serie.original_name}}</h6>
           <span :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
         </div>
-        <h5 class="card-title text-white">{{serie.name}}</h5>
+        <h5 class="card-title text-white m-1">{{serie.name}}</h5>
         <div class="stars">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+            <span v-for="star in getRating(serie.vote_average)" :key="star" class="fa fa-star checked"></span>
+            <span v-for="star in (5 - getRating(serie.vote_average))" :key="star" class="fa fa-star"></span>
           </div>
       </div>
 
       <div v-for="(pop, index) in store.popularList" :key="index" class="card border-0 mb-2 text-center">
         <div class="card-body text-overlay">
           <img :src="store.poster_path + pop.poster_path" alt="{{pop.original_title}}">
-          <h6 class="card-subtitle mb-2 text-muted">{{pop.original_title}}</h6>
-          <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
-          <h5 class="card-title text-white m-1">{{pop.title}}</h5>
+          <h6 class="card-subtitle text-muted">{{pop.original_title}}</h6>
+          <span :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
+          <h5 class="card-title text-white m-1">{{pop.title}}</h5> 
           <div class="stars">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+            <span v-for="star in getRating(pop.vote_average)" :key="star" class="fa fa-star checked"></span>
+            <span v-for="star in (5 - getRating(pop.vote_average))" :key="star" class="fa fa-star"></span>
           </div>
         </div>
       </div>
@@ -123,22 +117,25 @@ main{
         position: absolute;
         padding:10px 0;
         top: 20px;
-        width: 191px;
+        width: 100%;
         display: none;
       }
       .fi{
         position: absolute;
         left: 10px;
         top: 70px;
-        width: 210px;
+        width: 100%;
         display: none;
       }
     }
     img{
-      width: 191px;
+      width: 100%;
     }
     .checked{
       color: orange;
+    }
+    .card-body{
+      width: 100%;
     }
 }
 </style>

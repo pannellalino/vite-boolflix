@@ -23,7 +23,8 @@ import AppCard from './components/AppCard.vue'
         axios.get(store.apiUrlMovies, {
           params: {
             query: store.title,
-            poster_path: store.poster_path
+            poster_path: store.poster_path,
+            vote_average: store.vote_average
           }
         })
         .then(result =>{
@@ -38,7 +39,8 @@ import AppCard from './components/AppCard.vue'
           axios.get(store.apiUrlTv, {
             params: {
               query: store.title,
-              poster_path: store.poster_path
+              poster_path: store.poster_path,
+              vote_average: store.vote_average
             }
           })
           .then(result =>{
@@ -53,7 +55,8 @@ import AppCard from './components/AppCard.vue'
           axios.get(store.apiUrlPopular, {
             params: {
               query: store.title,
-              poster_path: store.poster_path
+              poster_path: store.poster_path,
+              vote_average: store.vote_average
             }
           })
           .then(result =>{

@@ -16,8 +16,10 @@ export default {
         },
         changeFlag(){
           if(store.original_language = 'en'){
-            return 'gb'
-          } else{
+            return 'us'
+          } else if(store.original_language = 'it'){
+            return 'it'
+          }else {
             return store.original_language
           }
         },
@@ -51,7 +53,7 @@ export default {
           <span v-if="store.original_language === 'it'" :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
         </div>
         <h5 class="card-title text-white m-1">{{movie.title}}</h5>
-        <div class="stars">
+          <div class="stars">
             <span v-for="star in getRating(movie.vote_average)" :key="star" class="fa fa-star checked"></span>
             <span v-for="star in (5 - getRating(movie.vote_average))" :key="star" class="fa fa-star"></span>
           </div>
@@ -64,7 +66,7 @@ export default {
           <span :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
         </div>
         <h5 class="card-title text-white m-1">{{serie.name}}</h5>
-        <div class="stars">
+          <div class="stars">
             <span v-for="star in getRating(serie.vote_average)" :key="star" class="fa fa-star checked"></span>
             <span v-for="star in (5 - getRating(serie.vote_average))" :key="star" class="fa fa-star"></span>
           </div>
@@ -74,7 +76,7 @@ export default {
         <div class="card-body text-overlay">
           <img :src="store.poster_path + pop.poster_path" alt="{{pop.original_title}}">
           <h6 class="card-subtitle text-muted">{{pop.original_title}}</h6>
-          <span :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
+          <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
           <h5 class="card-title text-white m-1">{{pop.title}}</h5> 
           <div class="stars">
             <span v-for="star in getRating(pop.vote_average)" :key="star" class="fa fa-star checked"></span>
@@ -105,7 +107,6 @@ main{
     }
   }
   .text-overlay{
-    position: relative;
     width: 100%;
     &:hover{
       height: 100%;
@@ -117,12 +118,14 @@ main{
         position: absolute;
         padding:10px 0;
         top: 20px;
+        right: 0;
         width: 100%;
         display: none;
       }
       .fi{
         position: absolute;
-        left: 10px;
+        left: 0px;
+        right: 0px;
         top: 70px;
         width: 100%;
         display: none;
@@ -130,8 +133,12 @@ main{
     }
     img{
       width: 100%;
+      &:hover{
+        opacity: .1;
+      }
     }
     .checked{
+      position: relative;
       color: orange;
     }
     .card-body{

@@ -81,6 +81,8 @@ export default {
             <span :class="'fi fi-' + changeFlag(pop.original_language)">{{original_language}}</span>
             <p class="p-4">{{pop.overview}}</p>
           </div>
+        </div>
+        <div>
           <h5 class="card-title text-white m-1">{{pop.title}}</h5> 
           <div class="stars">
             <span v-for="star in getRating(pop.vote_average)" :key="star" class="fa fa-star checked"></span>
@@ -101,6 +103,7 @@ main{
     color: white;
   }
   .card{
+    position: relative;
     width: calc(100% / 5);
     background-color: rgb(16, 16, 16);
     &:hover{
@@ -111,9 +114,13 @@ main{
     }
   }
   .overlay{
-    height: 340px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,.5);
+    padding: 16px;
+    background-color: rgba(0,0,0,.8);
     opacity: 0;
     overflow: scroll;
     &:hover{
@@ -132,7 +139,7 @@ main{
       .fi{
         left: 0px;
         right: 0px;
-        top: 70px;
+        top: 20px;
         width: 100%;
         display: none;
       }
@@ -144,7 +151,6 @@ main{
         width: 100%;
         height: 100%;
         display: none;
-        overflow: scroll;
       }
     }
     

@@ -48,6 +48,13 @@ export default {
           <span v-if="store.original_language === 'it'" :class="'fi fi-' + changeFlag()">{{original_language}}</span>
         </div>
         <h5 class="card-title text-white">{{movie.title}}</h5>
+        <div class="stars">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+          </div>
       </div>
 
       <div v-for="(serie, index) in store.tvList" :key="index" class="card border-0 mb-2 p-2 text-center">
@@ -57,6 +64,13 @@ export default {
           <span :class="'fi fi-' + changeFlag()">{{store.original_language}}</span>
         </div>
         <h5 class="card-title text-white">{{serie.name}}</h5>
+        <div class="stars">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+          </div>
       </div>
 
       <div v-for="(pop, index) in store.popularList" :key="index" class="card border-0 mb-2 text-center">
@@ -64,8 +78,15 @@ export default {
           <img :src="store.poster_path + pop.poster_path" alt="{{pop.original_title}}">
           <h6 class="card-subtitle mb-2 text-muted">{{pop.original_title}}</h6>
           <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
+          <h5 class="card-title text-white m-1">{{pop.title}}</h5>
+          <div class="stars">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+          </div>
         </div>
-        <h5 class="card-title text-white">{{pop.title}}</h5>
       </div>
 
     </div>
@@ -84,7 +105,7 @@ main{
     background-color: rgb(16, 16, 16);
     &:hover{
       cursor: pointer;   
-      h6, span{
+      h6, .fi{
         display: block;
       }
     }
@@ -105,7 +126,7 @@ main{
         width: 191px;
         display: none;
       }
-      span{
+      .fi{
         position: absolute;
         left: 10px;
         top: 70px;
@@ -115,6 +136,9 @@ main{
     }
     img{
       width: 191px;
+    }
+    .checked{
+      color: orange;
     }
 }
 </style>

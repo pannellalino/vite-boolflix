@@ -77,6 +77,7 @@ export default {
           <img :src="store.poster_path + pop.poster_path" alt="{{pop.original_title}}">
           <h6 class="card-subtitle text-muted">{{pop.original_title}}</h6>
           <span :class="'fi fi-' + changeFlag()">{{original_language}}</span>
+          <p class="p-3">{{pop.overview}}</p>
           <h5 class="card-title text-white m-1">{{pop.title}}</h5> 
           <div class="stars">
             <span v-for="star in getRating(pop.vote_average)" :key="star" class="fa fa-star checked"></span>
@@ -101,26 +102,24 @@ main{
     background-color: rgb(16, 16, 16);
     &:hover{
       cursor: pointer;   
-      h6, .fi{
+      h6, .fi, p{
         display: block;
+        z-index: 999;
       }
     }
   }
   .text-overlay{
-    width: 100%;
     &:hover{
-      height: 100%;
-      width: 100%;
-      filter: opacity(1);
-      z-index: 999;
-      }
-      h6{
+      opacity: .1;
+    }
+    h6{
         position: absolute;
         padding:10px 0;
         top: 20px;
         right: 0;
         width: 100%;
         display: none;
+        z-index: 333;
       }
       .fi{
         position: absolute;
@@ -130,12 +129,18 @@ main{
         width: 100%;
         display: none;
       }
+      p{
+        color: rgb(199, 199, 199);
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 80px;
+        width: 100%;
+        display: none;
+      }
     }
     img{
       width: 100%;
-      &:hover{
-        opacity: .1;
-      }
     }
     .checked{
       position: relative;
